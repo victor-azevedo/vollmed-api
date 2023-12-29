@@ -13,7 +13,7 @@ VollMed é uma aplicação web para agendamentos de consultas médicas.
 
 * Java
 * Spring Boot
-* MySql
+* MySQL
 
 ## Observações
 
