@@ -1,7 +1,6 @@
 package br.com.victor.vollmed.api.dto;
 
 import br.com.victor.vollmed.api.utils.Constants;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public record AddressUpdateDTO(
