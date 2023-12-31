@@ -40,4 +40,11 @@ public class DoctorController {
     var doctor = doctorRepository.getReferenceById(id);
     doctor.updateInfo(data);
   }
+
+  @DeleteMapping("/{id}")
+  @Transactional
+  public void delete(@PathVariable(value = "id") UUID id) {
+    var doctor = doctorRepository.getReferenceById(id);
+    doctor.setActive(false);
+  }
 }
