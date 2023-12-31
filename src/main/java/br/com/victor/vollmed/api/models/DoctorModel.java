@@ -1,5 +1,6 @@
 package br.com.victor.vollmed.api.models;
 
+import br.com.victor.vollmed.api.dto.DoctorUpdateDTO;
 import br.com.victor.vollmed.api.utils.Constants;
 import br.com.victor.vollmed.api.dto.DoctorPostDTO;
 import jakarta.persistence.*;
@@ -47,5 +48,20 @@ public class DoctorModel {
     this.crm = doctorDTO.crm();
     this.speciality = doctorDTO.speciality();
     this.address = new AddressModel(doctorDTO.address());
+  }
+
+  public void updateInfo(DoctorUpdateDTO data) {
+    if (data.name() != null) {
+      this.name = data.name();
+    }
+    if (data.email() != null) {
+      this.email = data.email();
+    }
+    if (data.phone() != null) {
+      this.phone = data.phone();
+    }
+    if (data.address() != null) {
+      this.address.updateInfo(data.address());
+    }
   }
 }

@@ -1,6 +1,7 @@
 package br.com.victor.vollmed.api.controllers;
 
 import br.com.victor.vollmed.api.dto.DoctorPostDTO;
+import br.com.victor.vollmed.api.dto.DoctorUpdateDTO;
 import br.com.victor.vollmed.api.models.DoctorModel;
 import br.com.victor.vollmed.api.repositories.DoctorRepository;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Validated
@@ -20,8 +22,8 @@ public class DoctorController {
 
   @PostMapping
   @Transactional
-  public ResponseEntity<HttpStatus> register(@Valid @RequestBody DoctorPostDTO doctorDTO) {
-    doctorRepository.save(new DoctorModel(doctorDTO));
+  public ResponseEntity<HttpStatus> register(@Valid @RequestBody DoctorPostDTO data) {
+    doctorRepository.save(new DoctorModel(data));
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
@@ -29,5 +31,13 @@ public class DoctorController {
   public ResponseEntity<List<DoctorModel>> getAllDoctors() {
     List<DoctorModel> doctorList = doctorRepository.findAll();
     return ResponseEntity.status(HttpStatus.OK).body(doctorList);
+  }
+
+  @PutMapping("/{id}")
+  @Transactional
+  public void update(
+      @PathVariable(value = "id") UUID id, @Valid @RequestBody DoctorUpdateDTO data) {
+    var doctor = doctorRepository.getReferenceById(id);
+    doctor.updateInfo(data);
   }
 }

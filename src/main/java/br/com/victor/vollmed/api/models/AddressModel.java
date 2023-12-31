@@ -1,6 +1,7 @@
 package br.com.victor.vollmed.api.models;
 
 import br.com.victor.vollmed.api.dto.AddressDTO;
+import br.com.victor.vollmed.api.dto.AddressUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,5 +48,29 @@ public class AddressModel {
     this.complement = addressDTO.complement();
     this.city = addressDTO.city();
     this.uf = addressDTO.uf();
+  }
+
+  public void updateInfo(AddressUpdateDTO address) {
+    if (address.street() != null) {
+      this.street = address.street();
+    }
+    if (address.neighborhood() != null) {
+      this.neighborhood = address.neighborhood();
+    }
+    if (address.postalCode() != null) {
+      this.postalCode = address.postalCode();
+    }
+    if (address.uf() != null) {
+      this.uf = address.uf();
+    }
+    if (address.city() != null) {
+      this.city = address.city();
+    }
+    if (address.number() != null) {
+      this.number = address.number();
+    }
+    if (address.complement() != null) {
+      this.complement = address.complement();
+    }
   }
 }
