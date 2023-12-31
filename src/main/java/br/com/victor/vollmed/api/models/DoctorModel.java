@@ -36,11 +36,16 @@ public class DoctorModel {
   @Column(unique = true, nullable = false)
   private Speciality speciality;
 
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "address_id", referencedColumnName = "id")
+  private AddressModel address;
+
   public DoctorModel(DoctorDTO doctorDTO) {
     this.name = doctorDTO.name();
     this.email = doctorDTO.email();
     this.phone = doctorDTO.phone();
     this.crm = doctorDTO.crm();
     this.speciality = doctorDTO.speciality();
+    this.address = new AddressModel(doctorDTO.address());
   }
 }

@@ -1,6 +1,7 @@
 package br.com.victor.vollmed.api.dto;
 
 import br.com.victor.vollmed.api.enums.Speciality;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ public record DoctorDTO(
                     + " digits.")
         String phone,
     @NotBlank(message = "The 'crm' is required.") String crm,
-    @NotNull(message = "The 'speciality' is required.") Speciality speciality) {
+    @NotNull(message = "The 'speciality' is required.") Speciality speciality,
+    @Valid @NotNull AddressDTO address) {
   private static final int PHONE_MIN_LENGTH = 10;
 }
