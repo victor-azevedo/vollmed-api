@@ -41,7 +41,11 @@ public class DoctorModel {
   @JoinColumn(name = "address_id", referencedColumnName = "id")
   private AddressModel address;
 
+  @Column(name = "is_active")
+  private boolean isActive;
+
   public DoctorModel(DoctorPostDTO doctorDTO) {
+    this.isActive = true;
     this.name = doctorDTO.name();
     this.email = doctorDTO.email();
     this.phone = doctorDTO.phone();

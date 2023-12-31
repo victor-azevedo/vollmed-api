@@ -29,7 +29,7 @@ public class DoctorController {
 
   @GetMapping
   public ResponseEntity<List<DoctorModel>> getAllDoctors() {
-    List<DoctorModel> doctorList = doctorRepository.findAll();
+    List<DoctorModel> doctorList = doctorRepository.findByIsActive(true);
     return ResponseEntity.status(HttpStatus.OK).body(doctorList);
   }
 
