@@ -1,7 +1,7 @@
 package br.com.victor.vollmed.api.models;
 
-import br.com.victor.vollmed.api.dto.DoctorDTO;
-import br.com.victor.vollmed.api.enums.Speciality;
+import br.com.victor.vollmed.api.utils.Constants;
+import br.com.victor.vollmed.api.dto.DoctorPostDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,13 +34,13 @@ public class DoctorModel {
 
   @Enumerated(EnumType.STRING)
   @Column(unique = true, nullable = false)
-  private Speciality speciality;
+  private Constants.Speciality speciality;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id", referencedColumnName = "id")
   private AddressModel address;
 
-  public DoctorModel(DoctorDTO doctorDTO) {
+  public DoctorModel(DoctorPostDTO doctorDTO) {
     this.name = doctorDTO.name();
     this.email = doctorDTO.email();
     this.phone = doctorDTO.phone();

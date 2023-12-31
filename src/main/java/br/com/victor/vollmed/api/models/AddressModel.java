@@ -1,7 +1,6 @@
 package br.com.victor.vollmed.api.models;
 
 import br.com.victor.vollmed.api.dto.AddressDTO;
-import br.com.victor.vollmed.api.dto.DoctorDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
