@@ -20,4 +20,4 @@ public record DoctorPostDTO(
         String phone,
     @NotBlank(message = "The 'crm' is required.") String crm,
     @NotNull(message = "The 'speciality' is required.") Constants.Speciality speciality,
-    @Valid @NotNull AddressDTO address) {}
+    @Valid @NotNull AddressPostDTO address) {}

@@ -1,6 +1,6 @@
 package br.com.victor.vollmed.api.models;
 
-import br.com.victor.vollmed.api.dto.AddressDTO;
+import br.com.victor.vollmed.api.dto.AddressPostDTO;
 import br.com.victor.vollmed.api.dto.AddressUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,7 +40,7 @@ public class AddressModel {
   @Column(nullable = false)
   private String uf;
 
-  public AddressModel(AddressDTO addressDTO) {
+  public AddressModel(AddressPostDTO addressDTO) {
     this.street = addressDTO.street();
     this.neighborhood = addressDTO.neighborhood();
     this.postalCode = addressDTO.postalCode();

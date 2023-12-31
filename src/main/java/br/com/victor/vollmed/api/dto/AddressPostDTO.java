@@ -4,7 +4,7 @@ import br.com.victor.vollmed.api.utils.Constants;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-public record AddressDTO(
+public record AddressPostDTO(
     @NotBlank(message = "The 'street' is required.") String street,
     @NotBlank(message = "The 'neighborhood' is required.") String neighborhood,
     @NotBlank
