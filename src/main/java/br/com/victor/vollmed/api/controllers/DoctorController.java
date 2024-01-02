@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,11 +21,14 @@ public class DoctorController {
 
   @PostMapping
   @Transactional
-  public ResponseEntity<DoctorResDTO> register(@Valid @RequestBody DoctorPostReqDTO data) {
+  public ResponseEntity<DoctorResDTO> register(
+      @Valid @RequestBody DoctorPostReqDTO data, UriComponentsBuilder uriBuilder) {
     Doctor doctor = doctorRepository.save(new Doctor(data));
 
+    var uri = uriBuilder.path("/doctors/{id}").buildAndExpand(doctor.getId()).toUri();
+
     DoctorResDTO doctorRes = new DoctorResDTO(doctor);
-    return ResponseEntity.status(HttpStatus.CREATED).body(doctorRes);
+    return ResponseEntity.created(uri).body(doctorRes);
   }
 
   @GetMapping
