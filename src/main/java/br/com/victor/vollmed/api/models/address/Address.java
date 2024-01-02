@@ -1,7 +1,5 @@
-package br.com.victor.vollmed.api.models;
+package br.com.victor.vollmed.api.models.address;
 
-import br.com.victor.vollmed.api.dto.AddressPostDTO;
-import br.com.victor.vollmed.api.dto.AddressUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressModel {
+public class Address {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -40,7 +38,7 @@ public class AddressModel {
   @Column(nullable = false)
   private String uf;
 
-  public AddressModel(AddressPostDTO addressDTO) {
+  public Address(AddressPostReqDTO addressDTO) {
     this.street = addressDTO.street();
     this.neighborhood = addressDTO.neighborhood();
     this.postalCode = addressDTO.postalCode();
@@ -50,7 +48,7 @@ public class AddressModel {
     this.uf = addressDTO.uf();
   }
 
-  public void updateInfo(AddressUpdateDTO address) {
+  public void updateInfo(AddressUpdateReqDTO address) {
     if (address.street() != null) {
       this.street = address.street();
     }

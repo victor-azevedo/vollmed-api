@@ -1,8 +1,7 @@
-package br.com.victor.vollmed.api.models;
+package br.com.victor.vollmed.api.models.doctor;
 
-import br.com.victor.vollmed.api.dto.DoctorUpdateDTO;
+import br.com.victor.vollmed.api.models.address.Address;
 import br.com.victor.vollmed.api.utils.Constants;
-import br.com.victor.vollmed.api.dto.DoctorPostDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorModel {
+public class Doctor {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -39,22 +38,22 @@ public class DoctorModel {
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id", referencedColumnName = "id")
-  private AddressModel address;
+  private Address address;
 
   @Column(name = "is_active")
   private boolean isActive;
 
-  public DoctorModel(DoctorPostDTO doctorDTO) {
+  public Doctor(DoctorPostReqDTO doctorDTO) {
     this.isActive = true;
     this.name = doctorDTO.name();
     this.email = doctorDTO.email();
     this.phone = doctorDTO.phone();
     this.crm = doctorDTO.crm();
     this.speciality = doctorDTO.speciality();
-    this.address = new AddressModel(doctorDTO.address());
+    this.address = new Address(doctorDTO.address());
   }
 
-  public void updateInfo(DoctorUpdateDTO data) {
+  public void updateInfo(DoctorUpdateReqDTO data) {
     if (data.name() != null) {
       this.name = data.name();
     }

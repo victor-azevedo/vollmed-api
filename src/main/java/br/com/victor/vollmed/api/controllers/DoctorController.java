@@ -1,9 +1,9 @@
 package br.com.victor.vollmed.api.controllers;
 
-import br.com.victor.vollmed.api.dto.DoctorPostDTO;
-import br.com.victor.vollmed.api.dto.DoctorUpdateDTO;
-import br.com.victor.vollmed.api.models.DoctorModel;
-import br.com.victor.vollmed.api.repositories.DoctorRepository;
+import br.com.victor.vollmed.api.models.doctor.DoctorPostReqDTO;
+import br.com.victor.vollmed.api.models.doctor.DoctorUpdateReqDTO;
+import br.com.victor.vollmed.api.models.doctor.Doctor;
+import br.com.victor.vollmed.api.models.doctor.DoctorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,23 +22,25 @@ public class DoctorController {
 
   @PostMapping
   @Transactional
-  public ResponseEntity<HttpStatus> register(@Valid @RequestBody DoctorPostDTO data) {
-    doctorRepository.save(new DoctorModel(data));
+  public ResponseEntity<HttpStatus> register(@Valid @RequestBody DoctorPostReqDTO data) {
+    doctorRepository.save(new Doctor(data));
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @GetMapping
-  public ResponseEntity<List<DoctorModel>> getAllDoctors() {
-    List<DoctorModel> doctorList = doctorRepository.findByIsActive(true);
-    return ResponseEntity.status(HttpStatus.OK).body(doctorList);
+  public ResponseEntity<List<Doctor>> getAllDoctors() {
+    List<Doctor> doctorList = doctorRepository.findByIsActive(true);
+    return ResponseEntity.ok(doctorList);
   }
 
   @PutMapping("/{id}")
   @Transactional
-  public void update(
-      @PathVariable(value = "id") UUID id, @Valid @RequestBody DoctorUpdateDTO data) {
+  public ResponseEntity<Doctor> update(
+      @PathVariable(value = "id") UUID id, @Valid @RequestBody DoctorUpdateReqDTO data) {
     var doctor = doctorRepository.getReferenceById(id);
     doctor.updateInfo(data);
+
+    return ResponseEntity.ok().build();
   }
 
   @DeleteMapping("/{id}")
